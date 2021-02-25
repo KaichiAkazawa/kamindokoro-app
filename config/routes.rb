@@ -11,5 +11,7 @@ Rails.application.routes.draw do
     registrations: 'owner_users/registrations'
   }
   root to: 'stores#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  resources :stores, except: [:index]
+
 end

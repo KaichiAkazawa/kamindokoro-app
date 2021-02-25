@@ -33,3 +33,26 @@
     </ul>
   </div>
 <% end %>
+
+<div>
+  仮眠どころ一覧
+  <div>
+    <% @stores.each do |store| %>
+      <div>
+        <%= store.name %>
+      </div>
+      <div>
+        <%= image_tag store.image.variant(resize: '200x200') %>
+      </div>
+      <div>
+        <%= store.adress %>
+      </div>
+      <div>
+        <%= store.station %>
+      </div>
+      <div>
+        <%= link_to 'ホームページ', store.link %>
+      </div>
+    <%end%>
+  </div>
+</div>

@@ -1,5 +1,11 @@
-<h1>お店を登録する</h1>
+<h1><%= link_to "Kamindokoro", root_path %></h1>
+
+
+<h2>お店を登録する</h2>
 <%= form_with model: @store, local: true do |f| %>
+
+<%= render 'shared/error_messages', model: f.object %>
+
   <div>
     お店の写真をアップロード
     <%= f.file_field :image %>

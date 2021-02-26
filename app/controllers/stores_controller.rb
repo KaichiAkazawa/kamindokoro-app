@@ -9,12 +9,39 @@ class StoresController < ApplicationController
 
   def create
     @store = Store.new(store_params)
-    binding.pry
     if @store.save
       redirect_to root_path
     else
       render :new
     end
+  end
+
+  def show
+    @store = Store.find(params[:id])
+  end
+
+  def edit
+    @store = Store.find(params[:id])
+    unless owner_user_signed_in? && current_owner_user == @store.owner_user
+      redirect_to root_path
+    end
+  end
+
+  def update
+    @store = Store.find(params[:id])
+    unless owner_user_signed_in? && current_owner_user == @store.owner_user
+      redirect_to root_path
+    end
+    @store.update(store_params)
+  end
+
+  def destroy
+    @store = Store.find(params[:id])
+    unless owner_user_signed_in? && current_owner_user == @store.owner_user
+      redirect_to root_path
+    end
+    @store.destroy
+    redirect_to root_path
   end
 
   private

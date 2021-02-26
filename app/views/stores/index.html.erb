@@ -8,7 +8,9 @@
 
 <% unless owner_user_signed_in? %>
   <div>
-    <p>一般の方</p>
+    <% unless customer_user_signed_in? %>
+      <p>一般の方</p>
+    <% end %>
     <ul>
     <% if customer_user_signed_in? %>
       <li><%= link_to "ログアウト", destroy_customer_user_session_path, method: :delete %></li>
@@ -22,10 +24,13 @@
 
 <% unless customer_user_signed_in? %>
   <div>
-    <p>オーナーの方</p>
+    <% unless owner_user_signed_in? %>
+      <p>オーナーの方</p>
+    <% end %>
     <ul>
     <% if owner_user_signed_in? %>
       <li><%= link_to "ログアウト", destroy_owner_user_session_path, method: :delete %></li>
+      <li><%= link_to "お店を登録する", new_store_path %></li>
     <% else %>
       <li><%= link_to "新規登録", new_owner_user_registration_path %></li>
       <li><%= link_to "ログイン", new_owner_user_session_path %></li>
@@ -45,13 +50,19 @@
         <%= image_tag store.image.variant(resize: '200x200') %>
       </div>
       <div>
+        所在地：
         <%= store.adress %>
       </div>
       <div>
+        最寄駅：
         <%= store.station %>
       </div>
       <div>
-        <%= link_to 'ホームページ', store.link %>
+        ホームページ：
+        <%= link_to "#{store.link}", store.link %>
+      </div>
+      <div>
+        <%= link_to "詳細", store_path(store) %>
       </div>
     <%end%>
   </div>

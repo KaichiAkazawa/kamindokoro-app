@@ -1,0 +1,35 @@
+<h1><%= link_to "Kamindokoro", root_path %></h1>
+
+<div>
+  <%= @store.name %>
+</div>
+<div>
+  <%= image_tag @store.image.variant(resize: '400x400') %>
+</div>
+<div>
+  所在地：
+  <%= @store.adress %>
+</div>
+<div>
+  最寄駅：
+  <%= @store.station %>
+</div>
+<div>
+  料金（1Hあたり）：
+  ¥ <%= @store.price %>
+</div>
+<div>
+  営業時間：
+  <%= @store.store_time %>
+</div>
+<div>
+  ホームページ：
+  <%= link_to "#{@store.link}", @store.link %>
+</div>
+
+<% if current_owner_user == @store.owner_user %>
+  <div>
+    <%= link_to "編集", edit_store_path(@store) %>
+    <%= link_to "削除", store_path(@store), method: :delete %>
+  </div>
+<% end %>

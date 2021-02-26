@@ -1,0 +1,40 @@
+<h1><%= link_to "Kamindokoro", root_path %></h1>
+
+
+<h2>お店を登録する</h2>
+<%= form_with model: @store, local: true do |f| %>
+
+<%= render 'shared/error_messages', model: f.object %>
+
+  <div>
+    お店の写真をアップロード
+    <%= f.file_field :image %>
+  </div>
+  <div>
+    <p>お店の名前</p>
+    <%= f.text_field :name, placeholder: "お店の名前（必須）" %>
+  </div>
+  <div>
+    <p>お店の住所</p>
+    <%= f.text_area :adress, placeholder: "お店の住所（必須）" %>
+  </div>
+  <div>
+    <p>お店の最寄駅</p>
+    <%= f.text_field :station, placeholder: "例）渋谷駅" %>
+  </div>
+  <div>
+    <p>料金（1Hあたり）</p>
+    <%= f.text_field :price %>
+  </div>
+  <div>
+    <p>営業時間帯</p>
+    <%= f.text_area :store_time, placeholder: "例) 平日：10:00-20:00  土日祝：10:00-2200" %>
+  <div>
+  <div>
+  <p>お店のホームページURL</p>
+    <%= f.url_field :link, placeholder: "お店のホームページURL" %>
+  </div>
+  <div>
+    <%= f.submit "登録する" %>
+  </div>
+<% end %>

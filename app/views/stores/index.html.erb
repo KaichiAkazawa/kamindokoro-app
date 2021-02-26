@@ -1,0 +1,35 @@
+<h1>Kamindokoro</h1>
+
+<% if customer_user_signed_in? %>
+  <%= current_customer_user.name %>
+<% elsif owner_user_signed_in? %>
+  <%= current_owner_user.name %>
+<% end %>
+
+<% unless owner_user_signed_in? %>
+  <div>
+    <p>一般の方</p>
+    <ul>
+    <% if customer_user_signed_in? %>
+      <li><%= link_to "ログアウト", destroy_customer_user_session_path, method: :delete %></li>
+    <% else %>
+      <li><%= link_to "新規登録", new_customer_user_registration_path %></li>
+      <li><%= link_to "ログイン", new_customer_user_session_path %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% unless customer_user_signed_in? %>
+  <div>
+    <p>オーナーの方</p>
+    <ul>
+    <% if owner_user_signed_in? %>
+      <li><%= link_to "ログアウト", destroy_owner_user_session_path, method: :delete %></li>
+    <% else %>
+      <li><%= link_to "新規登録", new_owner_user_registration_path %></li>
+      <li><%= link_to "ログイン", new_owner_user_session_path %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

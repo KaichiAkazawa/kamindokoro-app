@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'customer_users/show'
   devise_for :customer_users, controllers: {
     sessions: 'customer_users/sessions',
     passwords: 'customer_users/passwords',

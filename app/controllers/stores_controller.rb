@@ -22,30 +22,26 @@ class StoresController < ApplicationController
 
   def edit
     @store = Store.find(params[:id])
-    unless owner_user_signed_in? && current_owner_user == @store.owner_user
-      redirect_to root_path
-    end
+    redirect_to root_path unless owner_user_signed_in? && current_owner_user == @store.owner_user
   end
 
   def update
     @store = Store.find(params[:id])
-    unless owner_user_signed_in? && current_owner_user == @store.owner_user
-      redirect_to root_path
-    end
+    redirect_to root_path unless owner_user_signed_in? && current_owner_user == @store.owner_user
     @store.update(store_params)
   end
 
   def destroy
     @store = Store.find(params[:id])
-    unless owner_user_signed_in? && current_owner_user == @store.owner_user
-      redirect_to root_path
-    end
+    redirect_to root_path unless owner_user_signed_in? && current_owner_user == @store.owner_user
     @store.destroy
     redirect_to root_path
   end
 
   private
+
   def store_params
-    params.require(:store).permit(:name, :image, :adress, :station, :price, :store_time, :link).merge(owner_user_id: current_owner_user.id)
+    params.require(:store).permit(:name, :image, :adress, :station, :price, :store_time,
+                                  :link).merge(owner_user_id: current_owner_user.id)
   end
 end

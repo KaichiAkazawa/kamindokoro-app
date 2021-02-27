@@ -1,7 +1,7 @@
 <h1>Kamindokoro</h1>
 
 <% if customer_user_signed_in? %>
-  <%= current_customer_user.name %>
+  <%= link_to "#{current_customer_user.name}", customer_user_path(current_customer_user) %>
 <% elsif owner_user_signed_in? %>
   <%= current_owner_user.name %>
 <% end %>

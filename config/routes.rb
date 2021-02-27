@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   root to: 'stores#index'
 
   resources :stores, except: [:index]
-
+  resources :customer_users, only: [:show]
 end

@@ -33,3 +33,23 @@
     <%= link_to "削除", store_path(@store), method: :delete %>
   </div>
 <% end %>
+
+<% if customer_user_signed_in? %>
+  <div>
+    <h3>コメントする</h3>
+    <%= form_with(model: [@store, @comment], method: :post) do |f| %>
+      <%= f.text_area :text %>
+      <%= f.submit "送信" %>
+    <% end %>
+  </div>
+<% end %>
+
+<div>
+  <h3>コメント一覧</h3>
+  <% @comments.each do |comment| %>
+    <div>
+      <%= comment.customer_user.name %>さん：
+      <%= comment.text %>
+    <div>
+  <% end %>
+</div>

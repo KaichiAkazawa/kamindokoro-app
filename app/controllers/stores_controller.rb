@@ -18,8 +18,6 @@ class StoresController < ApplicationController
 
   def show
     @store = Store.find(params[:id])
-    @comment = Comment.new
-    @comments = @store.comments.includes(:customer_user)
   end
 
   def edit

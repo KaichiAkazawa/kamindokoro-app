@@ -3,6 +3,21 @@
 <div>
   <%= @store.name %>
 </div>
+
+<% if customer_user_signed_in? %>
+  <div>
+    <% if !Bookmark.exists?(customer_user_id: current_customer_user.id, store_id: @store.id) %>
+      <%= link_to store_bookmarks_path(@store), method: :post, local: true do %>
+        <i class="far fa-bookmark"></i>
+      <% end %>
+    <% else %>
+      <%= link_to store_bookmark_path(@store), method: :delete, local: true do %>
+        <i class="fas fa-bookmark"></i>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+
 <div>
   <%= image_tag @store.image.variant(resize: '400x400') %>
 </div>

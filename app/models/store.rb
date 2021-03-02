@@ -3,6 +3,7 @@ class Store < ApplicationRecord
   has_one_attached :image
   has_many :comments
   has_many :reviews, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
   with_options presence: true do
     validates :name

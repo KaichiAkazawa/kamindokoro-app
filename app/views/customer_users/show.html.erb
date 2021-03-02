@@ -1,4 +1,23 @@
 <h1><%= link_to "Kamindokoro", root_path %></h1>
 <h2><%= @name %>さんのマイページ</h2>
 
-ブックマークしたお店一覧
+<h3>ブックマークしたお店一覧</h3>
+<div>
+  <% @bookmarks.each do |bookmark| %>
+    <div>
+      <%= bookmark.store.name %>
+    </div>
+    <div>
+      <%= image_tag bookmark.store.image.variant(resize: '200x200') %>
+    </div>
+    <div>
+      <%= bookmark.store.adress %>
+    </div>
+    <div>
+      <%= bookmark.store.station %>
+    </div>
+    <div>
+      <%= link_to "#{bookmark.store.link}", bookmark.store.link %>
+    </div>
+  <% end %>
+<div>

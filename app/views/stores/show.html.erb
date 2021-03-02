@@ -26,6 +26,9 @@
   ホームページ：
   <%= link_to "#{@store.link}", @store.link %>
 </div>
+<div>
+  <%= @store.avg_score %>点（<%= @store.reviews.count %>件のレビュー）
+</div>
 
 <% if current_owner_user == @store.owner_user %>
   <div>
@@ -35,21 +38,6 @@
 <% end %>
 
 <% if customer_user_signed_in? %>
-  <div>
-    <h3>コメントする</h3>
-    <%= form_with(model: [@store, @comment], method: :post) do |f| %>
-      <%= f.text_area :text %>
-      <%= f.submit "送信" %>
-    <% end %>
-  </div>
+  <h3><%= link_to "レビューを見る", store_reviews_path(@store) %></h3>
 <% end %>
 
-<div>
-  <h3>コメント一覧</h3>
-  <% @comments.each do |comment| %>
-    <div>
-      <%= comment.customer_user.name %>さん：
-      <%= comment.text %>
-    <div>
-  <% end %>
-</div>

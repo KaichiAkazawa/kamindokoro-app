@@ -14,7 +14,8 @@ Rails.application.routes.draw do
 
   resources :stores, except: [:index] do
     resources :comments, only: [:create]
+    resources :reviews, only: [:index, :create]
   end
-  resources :customer_users, only: [:show]
+  resources :customer_users, only: [:index, :show]
   
 end

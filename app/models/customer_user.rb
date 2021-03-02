@@ -5,6 +5,7 @@ class CustomerUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :comments
+  has_many :reviews
 
   validates :name, presence: true
 end

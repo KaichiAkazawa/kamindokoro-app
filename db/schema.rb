@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_27_102428) do
+ActiveRecord::Schema.define(version: 2021_03_01_080457) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -69,6 +69,17 @@ ActiveRecord::Schema.define(version: 2021_02_27_102428) do
     t.index ["reset_password_token"], name: "index_owner_users_on_reset_password_token", unique: true
   end
 
+  create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "text"
+    t.integer "score"
+    t.bigint "customer_user_id"
+    t.bigint "store_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_user_id"], name: "index_reviews_on_customer_user_id"
+    t.index ["store_id"], name: "index_reviews_on_store_id"
+  end
+
   create_table "stores", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "adress", null: false
@@ -85,5 +96,7 @@ ActiveRecord::Schema.define(version: 2021_02_27_102428) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "customer_users"
   add_foreign_key "comments", "stores"
+  add_foreign_key "reviews", "customer_users"
+  add_foreign_key "reviews", "stores"
   add_foreign_key "stores", "owner_users"
 end

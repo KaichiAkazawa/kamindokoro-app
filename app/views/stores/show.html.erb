@@ -1,7 +1,7 @@
 <h1><%= link_to "Kamindokoro", root_path %></h1>
 
 <div>
-  <%= @store.name %>
+  <h2><%= @store.name %></h2>
 </div>
 
 <% if customer_user_signed_in? %>
@@ -20,6 +20,13 @@
 
 <div>
   <%= image_tag @store.image.variant(resize: '400x400') %>
+</div>
+<div>
+  <% @store.tags.each do |tag| %>
+    <ul>
+      <li><%= tag.word %></li>
+    </ul>
+  <% end %>
 </div>
 <div>
   所在地：

@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
     resources :reviews, only: [:index, :create]
     resources :bookmarks, only: [:create, :destroy]
+    collection do
+      get 'search'
+    end
   end
   resources :customer_users, only: [:index, :show]
   

@@ -4,12 +4,13 @@ class StoresController < ApplicationController
   end
 
   def new
-    @store = Store.new
+    @store = StoresTag.new
   end
 
   def create
-    @store = Store.new(store_params)
-    if @store.save
+    @store = StoresTag.new(store_params)
+    if @store.valid?
+      @store.save
       redirect_to root_path
     else
       render :new
@@ -38,10 +39,16 @@ class StoresController < ApplicationController
     redirect_to root_path
   end
 
+  def search
+    return nil if params[:keyword] == ""
+    tag = Tag.where(['word LIKE ?', "%#{params[:keyword]}%"])
+    render json:{ keyword: tag }
+  end
+
   private
 
   def store_params
-    params.require(:store).permit(:name, :image, :adress, :station, :price, :store_time,
-                                  :link).merge(owner_user_id: current_owner_user.id)
+    params.require(:stores_tag).permit(:name, :image, :adress, :station, :price, :store_time,
+                                  :link, :word).merge(owner_user_id: current_owner_user.id)
   end
 end

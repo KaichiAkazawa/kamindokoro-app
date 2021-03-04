@@ -2,7 +2,7 @@
 
 
 <h2>お店を登録する</h2>
-<%= form_with model: @store, local: true do |f| %>
+<%= form_with model: @store, url: stores_path, local: true do |f| %>
 
 <%= render 'shared/error_messages', model: f.object %>
 
@@ -33,6 +33,12 @@
   <div>
   <p>お店のホームページURL</p>
     <%= f.url_field :link, placeholder: "お店のホームページURL" %>
+  </div>
+  <div>
+    <p>タグ</p>
+    <%= f.text_field :word %>
+  </div>
+  <div id="search-result">
   </div>
   <div>
     <%= f.submit "登録する" %>

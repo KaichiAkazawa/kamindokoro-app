@@ -50,6 +50,11 @@
         <%= image_tag store.image.variant(resize: '200x200') %>
       </div>
       <div>
+        <% store.tags.each do |tag| %>
+          <%= tag.word %>
+        <% end %>
+      </div>
+      <div>
         所在地：
         <%= store.adress %>
       </div>

@@ -4,14 +4,8 @@ class Store < ApplicationRecord
   has_many :comments
   has_many :reviews, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
-
-  with_options presence: true do
-    validates :name
-    validates :image
-    validates :adress
-    validates :price
-    validates :store_time
-  end
+  has_many :store_tag_relations
+  has_many :tags, through: :store_tag_relations
 
   def avg_score
     unless self.reviews.empty?

@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   root to: 'stores#index'
 
   resources :stores, except: [:index] do
-    resources :comments, only: [:create]
     resources :reviews, only: [:index, :create]
     resources :bookmarks, only: [:create, :destroy]
     collection do

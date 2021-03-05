@@ -8,15 +8,15 @@ class Store < ApplicationRecord
   has_many :tags, through: :store_tag_relations
 
   def avg_score
-    unless self.reviews.empty?
-      reviews.average(:score).round(1).to_f
-    else
+    if reviews.empty?
       0.0
-    end 
-  end 
+    else
+      reviews.average(:score).round(1).to_f
+    end
+  end
 
   def self.store_search(search)
-    if search != ""
+    if search != ''
       Store.where('name LIKE(?) OR station LIKE(?) OR adress LIKE(?)', "%#{search}%", "%#{search}%", "%#{search}%")
     else
       Store.all

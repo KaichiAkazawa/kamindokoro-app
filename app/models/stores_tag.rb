@@ -13,7 +13,8 @@ class StoresTag
   def save
     tag = Tag.where(word: word).first_or_initialize
     tag.save
-    store = Store.create(name: name, image: image, adress: adress, station: station, price: price, store_time: store_time, link: link, owner_user_id: owner_user_id)
+    store = Store.create(name: name, image: image, adress: adress, station: station, price: price, store_time: store_time,
+                         link: link, owner_user_id: owner_user_id)
     StoreTagRelation.create(store_id: store.id, tag_id: tag.id)
   end
 end

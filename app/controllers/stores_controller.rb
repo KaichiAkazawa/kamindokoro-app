@@ -39,13 +39,16 @@ class StoresController < ApplicationController
     redirect_to root_path
   end
 
-  def tag_search #店舗投稿時に設定する既存タグを検索
-    return nil if params[:keyword] == ""
+  # 店舗投稿時に設定する既存タグを検索
+  def tag_search
+    return nil if params[:keyword] == ''
+
     tag = Tag.where(['word LIKE ?', "%#{params[:keyword]}%"])
-    render json:{ keyword: tag }
+    render json: { keyword: tag }
   end
 
-  def store_search #店舗を検索
+  # 店舗を検索
+  def store_search
     @stores = Store.store_search(params[:keyword]).order(created_at: :desc)
   end
 
@@ -53,6 +56,6 @@ class StoresController < ApplicationController
 
   def store_params
     params.require(:stores_tag).permit(:name, :image, :adress, :station, :price, :store_time,
-                                  :link, :word).merge(owner_user_id: current_owner_user.id)
+                                       :link, :word).merge(owner_user_id: current_owner_user.id)
   end
 end

@@ -40,6 +40,13 @@
 <% end %>
 
 <div>
+  <%= form_with(url: store_search_stores_path, local: true, method: :get) do |f| %>
+    <%= f.text_field :keyword, placeholder: "店舗名・地名" %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
+
+<div>
   仮眠どころ一覧
   <div>
     <% @stores.each do |store| %>

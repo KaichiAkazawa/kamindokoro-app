@@ -14,4 +14,12 @@ class Store < ApplicationRecord
       0.0
     end 
   end 
+
+  def self.store_search(search)
+    if search != ""
+      Store.where('name LIKE(?) OR station LIKE(?) OR adress LIKE(?)', "%#{search}%", "%#{search}%", "%#{search}%")
+    else
+      Store.all
+    end
+  end
 end

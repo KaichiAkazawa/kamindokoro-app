@@ -1,0 +1,81 @@
+<h1>Kamindokoro</h1>
+
+<% if customer_user_signed_in? %>
+  <%= link_to "#{current_customer_user.name}", customer_user_path(current_customer_user) %>
+<% elsif owner_user_signed_in? %>
+  <%= current_owner_user.name %>
+<% end %>
+
+<% unless owner_user_signed_in? %>
+  <div>
+    <% unless customer_user_signed_in? %>
+      <p>一般の方</p>
+    <% end %>
+    <ul>
+    <% if customer_user_signed_in? %>
+      <li><%= link_to "ログアウト", destroy_customer_user_session_path, method: :delete %></li>
+    <% else %>
+      <li><%= link_to "新規登録", new_customer_user_registration_path %></li>
+      <li><%= link_to "ログイン", new_customer_user_session_path %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% unless customer_user_signed_in? %>
+  <div>
+    <% unless owner_user_signed_in? %>
+      <p>オーナーの方</p>
+    <% end %>
+    <ul>
+    <% if owner_user_signed_in? %>
+      <li><%= link_to "ログアウト", destroy_owner_user_session_path, method: :delete %></li>
+      <li><%= link_to "お店を登録する", new_store_path %></li>
+    <% else %>
+      <li><%= link_to "新規登録", new_owner_user_registration_path %></li>
+      <li><%= link_to "ログイン", new_owner_user_session_path %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div>
+  <%= form_with(url: store_search_stores_path, local: true, method: :get) do |f| %>
+    <%= f.text_field :keyword, placeholder: "店舗名・地名" %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
+
+<div>
+  仮眠どころ一覧
+  <div>
+    <% @stores.each do |store| %>
+      <div>
+        <%= store.name %>
+      </div>
+      <div>
+        <%= image_tag store.image.variant(resize: '200x200') %>
+      </div>
+      <div>
+        <% store.tags.each do |tag| %>
+          <%= tag.word %>
+        <% end %>
+      </div>
+      <div>
+        所在地：
+        <%= store.adress %>
+      </div>
+      <div>
+        最寄駅：
+        <%= store.station %>
+      </div>
+      <div>
+        ホームページ：
+        <%= link_to "#{store.link}", store.link %>
+      </div>
+      <div>
+        <%= link_to "詳細", store_path(store) %>
+      </div>
+    <%end%>
+  </div>
+</div>

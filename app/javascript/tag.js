@@ -4,7 +4,7 @@ if (location.pathname.match("stores/new")){
     inputElement.addEventListener("keyup", () => {
       const keyword = document.getElementById("stores_tag_word").value;
       const XHR = new XMLHttpRequest();
-      XHR.open("GET", `search/?keyword=${keyword}`, true);
+      XHR.open("GET", `tag_search/?keyword=${keyword}`, true);
       XHR.responseType = "json"
       XHR.send();
       XHR.onload = () => {

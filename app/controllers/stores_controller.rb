@@ -1,6 +1,6 @@
 class StoresController < ApplicationController
   def index
-    @stores = Store.all
+    @stores = Store.all.order(created_at: :desc)
   end
 
   def new
@@ -39,10 +39,14 @@ class StoresController < ApplicationController
     redirect_to root_path
   end
 
-  def search
+  def tag_search #店舗投稿時に設定する既存タグを検索
     return nil if params[:keyword] == ""
     tag = Tag.where(['word LIKE ?', "%#{params[:keyword]}%"])
     render json:{ keyword: tag }
+  end
+
+  def store_search #店舗を検索
+    @stores = Store.store_search(params[:keyword]).order(created_at: :desc)
   end
 
   private

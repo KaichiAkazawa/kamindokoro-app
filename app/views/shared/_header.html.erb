@@ -1,0 +1,48 @@
+<header class="d-flex justify-content-between align-items-center py-4">
+
+  <h3><%= link_to "Kamindokoro", root_path, class: "top-title pl-3 text-dark" %></h3>
+
+  <nav class="nav justify-content-end">
+    <% if customer_user_signed_in? %>
+    <div class="dropdown">
+      <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">メニュー
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <%= link_to "マイページ", customer_user_path(current_customer_user), class:"dropdown-item" %>
+        <%= link_to "ログアウト", destroy_customer_user_session_path, method: :delete, class:"dropdown-item" %>
+      </div>
+    </div>
+    <% elsif owner_user_signed_in? %>
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">メニュー
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <%= link_to "お店を登録", new_store_path, class:"dropdown-item" %>
+          <%= link_to "ログアウト", destroy_owner_user_session_path, method: :delete, class:"dropdown-item" %>
+        </div>
+      </div>
+    <% else %>
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">一般の方
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu3">
+          <%= link_to "新規登録", new_customer_user_registration_path, class:"dropdown-item" %>
+          <%= link_to "ログイン", new_customer_user_session_path, class:"dropdown-item" %>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">オーナーの方
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu4">
+            <%= link_to "オーナー登録", new_owner_user_registration_path, class:"dropdown-item" %>
+            <%= link_to "ログイン", new_owner_user_session_path, class:"dropdown-item" %>
+        </div>
+      </div>
+    <% end %>
+  </nav>
+</header>
+

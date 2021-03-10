@@ -1,44 +1,57 @@
 <%= render "shared/header" %>
 
 <div class="main">
-  <div>
-    <%= form_with(url: store_search_stores_path, local: true, method: :get) do |f| %>
-      <%= f.text_field :keyword, placeholder: "店舗名・地名" %>
-      <%= f.submit "検索" %>
-    <% end %>
-  </div>
-
-  <div>
-    仮眠どころ一覧
-    <div>
-      <% @stores.each do |store| %>
-        <div>
-          <%= store.name %>
-        </div>
-        <div>
-          <%= image_tag store.image.variant(resize: '200x200') %>
-        </div>
-        <div>
-          <% store.tags.each do |tag| %>
-            <%= tag.word %>
-          <% end %>
-        </div>
-        <div>
-          所在地：
-          <%= store.adress %>
-        </div>
-        <div>
-          最寄駅：
-          <%= store.station %>
-        </div>
-        <div>
-          ホームページ：
-          <%= link_to "#{store.link}", store.link %>
-        </div>
-        <div>
-          <%= link_to "詳細", store_path(store) %>
-        </div>
-      <%end%>
+  <div class="home-header text-center">
+    <div class="home-title col-12">
+      <h1>さあ、寝よう　　　　　　　　　　</h1>
+    </div>
+    <div class="search-form">
+      <%= form_with(url: store_search_stores_path, local: true, method: :get) do |f| %>
+        <%= f.text_field :keyword, placeholder: "店舗名・地名", class:" search-form col-6" %>
+        <%= f.submit "検索",  class:"search-btn" %>
+      <% end %>
     </div>
   </div>
+
+  <div class="top-page-main">
+    <div class="container">
+      <div class="stores-title pt-4 ">
+        <h5 class="text-center"><span class="title">仮眠どころ一覧</span></h5>
+      </div>
+      <div class="stores my-5 row">
+        <% @stores.each do |store| %>
+          <div class="store col-xl-4 col-md-6 col-12 ">
+            <div class="store-card">
+              <div class="store-img">
+                <%= link_to store_path(store) do %>
+                  <%= image_tag store.image.variant(resize: '340x300'), class:"img-responsive" %>
+                <% end %>
+              </div>
+              <div class="store-content p-3">
+                <div class="store-name">
+                  <%= store.name %>
+                </div>
+                <ul class="store-tags list-inline">
+                  <% store.tags.each do |tag| %>
+                    <li class="tag list-inline-item"><%= tag.word %></li>
+                  <% end %>
+                </ul>
+                <div class="store-station">
+                  最寄駅：
+                  <%= store.station %>
+                </div>
+                <div>
+                  <%= link_to store_reviews_path(store) do %>
+                    <%= store.avg_score %>点（<%= store.reviews.count %>件のレビュー）
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <%end%>
+      </div>
+    <div>
+  </div>
 </div>
+
+<%= render "shared/footer" %>

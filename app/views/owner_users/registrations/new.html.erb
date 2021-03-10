@@ -1,34 +1,50 @@
-<h2>オーナー新規会員登録</h2>
+<%= render "shared/header"  %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "owner_users/shared/error_messages", resource: resource %>
+<%= form_with model: @owner_user, url: owner_user_registration_path, class: "registration-main", local: true do |f| %>
+  
+  <div class="form-wrap">
+    <div class="form-header">
+      <h4 class="form-header-text">オーナー情報入力</h4>
+    </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_area :name, autofocus: true, autocomplete: "name" %>
-  </div>
+    <%= render "customer_users/shared/error_messages", model: f.object %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="form-group">
+      <div class="form-text-wrap">
+        <label class="form-text">ユーザー名</label>
+        <span class="indispensable">必須</span>
+      </div>
+      <%= f.text_field :name, id: "name", placeholder: "ユーザー名", class: "input-default" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+    <div class="form-group">
+      <div class="form-text-wrap">
+        <label class="form-text">メールアドレス</label>
+        <span class="indispensable">必須</span>
+      </div>
+      <%= f.email_field :email, id: "email", placeholder: "メールアドレス", class: "input-default" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="form-group">
+      <div class="form-text-wrap">
+        <label class="form-text">パスワード</label>
+        <span class="indispensable">必須</span>
+      </div>
+      <%= f.password_field :password, id: "password", placeholder: "6文字以上", class: "input-default" %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+    <div class="form-group">
+      <div class="form-text-wrap">
+        <label class="form-text">パスワード（確認）</label>
+        <span class="indispensable">必須</span>
+      </div>
+      <%= f.password_field :password_confirmation, id:"password-confirmation", placeholder: "同じパスワードを入力して下さい", class: "input-default" %>
+    </div>
+
+    <div class="register-btn">
+      <%= f.submit "登録", class: "register-btn-item" %>
+    </div>
   </div>
 <% end %>
 
-<%= render "owner_users/shared/links" %>
+<%= render "shared/footer"  %>

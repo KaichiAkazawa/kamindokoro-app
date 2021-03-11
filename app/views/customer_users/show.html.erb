@@ -1,23 +1,52 @@
-<h1><%= link_to "Kamindokoro", root_path %></h1>
-<h2><%= @name %>さんのマイページ</h2>
+<%= render 'shared/header' %>
 
-<h3>ブックマークしたお店一覧</h3>
-<div>
-  <% @bookmarks.each do |bookmark| %>
-    <div>
-      <%= bookmark.store.name %>
+<div class="customer">
+  <div class="profile">
+    <div class="profile-img-area">
+      <img src="/assets/profile-default.png" width="100px", height="100px" class="profile-img" >
     </div>
-    <div>
-      <%= image_tag bookmark.store.image.variant(resize: '200x200') %>
+    <div class="customer-name">
+      <h3><%= @name %></h3>
     </div>
-    <div>
-      <%= bookmark.store.adress %>
+  </div>
+  <div class="bookmarks-title">
+    <h5 class="title text-center">ブックマーク一覧</h5>
+  </div>
+
+  <div class="container">
+    <div class="stores my-5 row">
+      <% @bookmarks.each do |bookmark| %>
+        <div class="store col-xl-4 col-md-6 col-12">
+          <div class="store-card">
+            <div class="store-img">
+              <%= link_to store_path(bookmark.store) do %>
+                <%= image_tag bookmark.store.image.variant(resize: '340x300'), class:"img-responsive" %>
+              <% end %>
+            </div>
+            <div class="store-content p-3">
+              <div class="store-name">
+                <%= bookmark.store.name %>
+              </div>
+              <ul class="store-tags list-inline">
+                <% bookmark.store.tags.each do |tag| %>
+                  <li class="tag list-inline-item"><%= tag.word %></li>
+                <% end %>
+              </ul>
+              <div class="store-station">
+                最寄駅：
+                <%= bookmark.store.station %>
+              </div>
+              <div>
+                <%= link_to store_reviews_path(bookmark.store) do %>
+                  <%= bookmark.store.avg_score %>点（<%= bookmark.store.reviews.count %>件）
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <div>
-      <%= bookmark.store.station %>
-    </div>
-    <div>
-      <%= link_to "#{bookmark.store.link}", bookmark.store.link %>
-    </div>
-  <% end %>
-<div>
+  </div>
+</div>
+
+<%= render 'shared/footer'  %>

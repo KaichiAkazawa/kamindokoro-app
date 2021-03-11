@@ -1,65 +1,94 @@
-<h1><%= link_to "Kamindokoro", root_path %></h1>
+<%= render 'shared/header' %>
 
-<div>
-  <h2><%= @store.name %></h2>
-</div>
-
-<% if customer_user_signed_in? %>
-  <div>
-    <% if !Bookmark.exists?(customer_user_id: current_customer_user.id, store_id: @store.id) %>
-      <%= link_to store_bookmarks_path(@store), method: :post, local: true do %>
-        <i class="far fa-bookmark"></i>
-      <% end %>
-    <% else %>
-      <%= link_to store_bookmark_path(@store), method: :delete, local: true do %>
-        <i class="fas fa-bookmark"></i>
-      <% end %>
+<div class="store-show">
+  <div class="store-show-top">
+      <h3 class="store-show-name"><%= @store.name %></h3>
+    <% if customer_user_signed_in? %>
+      <div class="bookmark-icon">
+        <% if !Bookmark.exists?(customer_user_id: current_customer_user.id, store_id: @store.id) %>
+          <%= link_to store_bookmarks_path(@store), method: :post, local: true do %>
+            <i class="far fa-bookmark icon"></i>
+          <% end %>
+        <% else %>
+          <%= link_to store_bookmark_path(@store), method: :delete, local: true do %>
+            <i class="fas fa-bookmark icon"></i>
+          <% end %>
+        <% end %>
+      </div>
     <% end %>
   </div>
-<% end %>
 
-<div>
-  <%= image_tag @store.image.variant(resize: '400x400') %>
-</div>
-<div>
-  <% @store.tags.each do |tag| %>
-    <ul>
-      <li><%= tag.word %></li>
-    </ul>
-  <% end %>
-</div>
-<div>
-  所在地：
-  <%= @store.adress %>
-</div>
-<div>
-  最寄駅：
-  <%= @store.station %>
-</div>
-<div>
-  料金（1Hあたり）：
-  ¥ <%= @store.price %>
-</div>
-<div>
-  営業時間：
-  <%= @store.store_time %>
-</div>
-<div>
-  ホームページ：
-  <%= link_to "#{@store.link}", @store.link %>
-</div>
-<div>
-  <%= @store.avg_score %>点（<%= @store.reviews.count %>件のレビュー）
-</div>
+  <div class="store-show-content">
+    <div class="store-show-card">
+      <div class="store-show-img-content">
+        <%= image_tag @store.image.variant(resize: '500x500'), class:"store-show-img" %>
+      </div>
+      <% @store.tags.each do |tag| %>
+        <ul class="store-tags list-inline">
+          <li class="tag list-inline-item"><%= tag.word %></li>
+        </ul>
+      <% end %>
+      <div class="review-link">
+        <%= link_to store_reviews_path(@store) do %>
+          <%= @store.avg_score %>点（<%= @store.reviews.count %>件）
+        <% end %>
+      </div>
+      
+      <div class="store-infos">
+        <h5 class="store-infos-text">店舗情報</h5>
 
-<% if current_owner_user == @store.owner_user %>
-  <div>
-    <%= link_to "編集", edit_store_path(@store) %>
-    <%= link_to "削除", store_path(@store), method: :delete %>
+        <div class="store-info">
+          <div class="store-info-title">
+            所在地
+          </div>
+          <div class="store-info-content">
+            <%= @store.adress %>
+          </div>
+        </div>
+        <div class="store-info">
+          <div class="store-info-title">
+            最寄駅
+          </div>
+          <div class="store-info-content">
+            <%= @store.station %>
+          </div>
+        </div>
+        <div class="store-info">
+          <div class="store-info-title">
+            料金（1Hあたり）
+          </div>
+          <div class="store-info-content">
+            ¥ <%= @store.price %>
+          </div>
+        </div>
+        <div class="store-info">
+          <div class="store-info-title">
+            営業時間
+          </div>
+          <div class="store-info-content">
+            <%= @store.store_time %>
+          </div>
+        </div>
+        <div class="store-info">
+          <div class="store-info-title">
+            ホームページ
+          </div>
+          <div class="store-info-content">
+            <%= link_to "#{@store.link}", @store.link %>
+          </div>
+        </div>
+        
+      </div>
+
+      <% if current_owner_user == @store.owner_user %>
+        <div>
+          <%= link_to "編集", edit_store_path(@store) %>
+          <%= link_to "削除", store_path(@store), method: :delete %>
+        </div>
+      <% end %>
+
+    </div>
   </div>
-<% end %>
+</div>
 
-<% if customer_user_signed_in? %>
-  <h3><%= link_to "レビューを見る", store_reviews_path(@store) %></h3>
-<% end %>
-
+<%= render 'shared/footer' %>

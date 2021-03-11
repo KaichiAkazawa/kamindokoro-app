@@ -81,10 +81,10 @@
       </div>
 
       <% if current_owner_user == @store.owner_user %>
-        <div>
-          <%= link_to "編集", edit_store_path(@store) %>
-          <%= link_to "削除", store_path(@store), method: :delete %>
-        </div>
+        <ul class="owner-menu list-inline">
+          <li class="edit-btn list-inline-item"><%= link_to "編集", edit_store_path(@store), class: "edit-link" %></li>
+          <li class="delete-btn list-inline-item "><%= link_to "削除", store_path(@store), method: :delete, class: "delete-link" %></li>
+        </ul>
       <% end %>
 
     </div>

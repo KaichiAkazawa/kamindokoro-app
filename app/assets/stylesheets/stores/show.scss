@@ -72,3 +72,33 @@
   width: 70%;
   font-size: 13px;
 }
+
+.owner-menu {
+  margin-top: 20px;
+  padding-top: 10px;
+  text-align: center;
+  border-top: 1px #f5f5f5 solid;
+}
+
+.edit-btn {
+  height: 20px;
+  width: 50px;
+  border-radius: 20px;
+  border: 0px none;
+  .edit-link {
+    text-decoration: none;
+    color: darkgray;
+  }
+}
+
+.delete-btn {
+  height: 20px;
+  width: 50px;
+  border-radius: 20px;
+  border: 0px none;
+  .delete-link {
+    text-decoration: none;
+    color: darkgray;
+  }
+}
+

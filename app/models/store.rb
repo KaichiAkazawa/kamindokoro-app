@@ -15,6 +15,14 @@ class Store < ApplicationRecord
     end
   end
 
+  def review_score_percentage
+    if reviews.empty?
+      0.0
+    else
+      reviews.average(:score).round(1).to_f * 100 / 5
+    end
+  end
+
   def self.store_search(search)
     if search != ''
       Store.where('name LIKE(?) OR station LIKE(?) OR adress LIKE(?)', "%#{search}%", "%#{search}%", "%#{search}%")

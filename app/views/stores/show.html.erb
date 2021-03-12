@@ -28,6 +28,10 @@
           <li class="tag list-inline-item"><%= tag.word %></li>
         </ul>
       <% end %>
+      <div class="star-rating">
+        <div class="star-rating-front" style="width: <%= @store.review_score_percentage %>%">★★★★★</div>
+        <div class="star-rating-back">★★★★★</div>
+      </div>
       <div class="review-link">
         <%= link_to store_reviews_path(@store) do %>
           <%= @store.avg_score %>点（<%= @store.reviews.count %>件）

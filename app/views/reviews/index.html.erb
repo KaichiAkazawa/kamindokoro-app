@@ -1,43 +1,69 @@
-<h1><%= link_to "Kamindokoro", root_path %></h1>
+<%= render 'shared/header' %>
 
-<div>
-  <h3>レビュー一覧</h3>
-  <div>
+<div class="review-wrap">
+  <div class="reviews">
+    <div class="review-count">
+      <h5>レビュー（<%= @reviews.count %>件）</h5>
+    </div>
+
     <% @reviews.each do |review| %>
-      <div>
-        <%= review.customer_user.name %>
-      </div>
-      <div>
-        <%= review.score %>
-      </div>
-      <div>
-        <%= review.text %>
-      </div>
-    <% end %>
-  <div>
-</div>
-
-<% if customer_user_signed_in? %>
-<div>
-  <h3>レビューを書く</h3>
-  <div>
-    <%= form_with(model: [@store, @review], local: true) do |f| %>
-      <div class="main-rating">
-        <div class="ratings mb-3">
-          <span class="fa fa-star-o" id="star"></span>
-          <span class="fa fa-star-o" id="star"></span>
-          <span class="fa fa-star-o" id="star"></span>
-          <span class="fa fa-star-o" id="star"></span>
-          <span class="fa fa-star-o" id="star"></span>
+      <div class="review">
+        <div class="reviewer">
+          <div class="reviewer-img">
+            <%= link_to customer_user_path(review.customer_user) do %>
+              <img src="/assets/profile-default.png" width="50px", height="50px" class="profile-img" >
+            <% end %>
+          </div>
+          <div class="reviewer-name">
+            <%= link_to customer_user_path(review.customer_user) do %>
+              <%= review.customer_user.name %>
+            <% end %>
+            さん
+          </div>
         </div>
-        <div class="ml-3 rating-value-display"><span id="rating-value-display">0</span>/5</div>
+
+        <div class="star-rating">
+          <div class="star-rating-front" style="width: <%= review.score * 100 / 5 %>%">★★★★★</div>
+          <div class="star-rating-back">★★★★★</div>
+        </div>
+
+        <div class="review-text">
+          <%= review.text %>
+        </div>
       </div>
-      <%= f.hidden_field :score, id: "rating-value" %>
-      <%= f.text_area :text, class: "textarea" %>
-      <%= f.submit "送信", class: "button mt-3" %>
     <% end %>
   </div>
+
+  <% if customer_user_signed_in? %>
+  <div>
+    <h5 class="review-form-title">レビューを投稿</h5>
+    <div class="rating-box mt-3">
+      <%= form_with(model: [@store, @review], local: true) do |f| %>
+        <div class="main-rating">
+          <div class="ratings mb-3">
+            <span class="fa fa-star-o" id="star"></span>
+            <span class="fa fa-star-o" id="star"></span>
+            <span class="fa fa-star-o" id="star"></span>
+            <span class="fa fa-star-o" id="star"></span>
+            <span class="fa fa-star-o" id="star"></span>
+          </div>
+          <div class="ml-3 rating-value-display"><span id="rating-value-display">0</span>/5</div>
+        </div>
+        <div class="review-form">
+          <%= f.hidden_field :score, id: "rating-value" %>
+          <div class="review-textarea-form">
+            <%= f.text_area :text, class: "review-textarea" %>
+          </div>
+          <div class="review-btn">
+            <%= f.submit "送信", class: "review-btn-item" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
 </div>
-<% end %>
 
 <%= link_to "戻る", store_path(@store) %>
+
+<%= render 'shared/footer' %>

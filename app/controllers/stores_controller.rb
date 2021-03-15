@@ -26,7 +26,6 @@ class StoresController < ApplicationController
     @store = Store.find(params[:id])
     redirect_to root_path unless owner_user_signed_in? && current_owner_user == @store.owner_user
     @store_tag = StoresTag.new(store: @store)
-    binding.pry
   end
 
   def update

@@ -4,7 +4,7 @@ class Store < ApplicationRecord
   has_many :comments
   has_many :reviews, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
-  has_many :store_tag_relations
+  has_many :store_tag_relations, dependent: :destroy
   has_many :tags, through: :store_tag_relations
 
   def avg_score

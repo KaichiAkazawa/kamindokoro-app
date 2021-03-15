@@ -10,11 +10,52 @@ class StoresTag
     validates :store_time
   end
 
-  def save
-    tag = Tag.where(word: word).first_or_initialize
-    tag.save
-    store = Store.create(name: name, image: image, adress: adress, station: station, price: price, store_time: store_time,
-                         link: link, owner_user_id: owner_user_id)
-    StoreTagRelation.create(store_id: store.id, tag_id: tag.id)
+  # レコードの有無で新規作成or更新を分岐
+  delegate :persisted?, to: :store
+
+  def initialize(attributes = nil, store: Store.new)
+    @store = store
+    attributes ||= default_attributes
+    super(attributes)
+  end
+
+  def save(tag_list)
+    ActiveRecord::Base.transaction do
+      @store.update(name: name, image: image, adress: adress, station: station, price: price, store_time: store_time,
+                          link: link, owner_user_id: owner_user_id)
+
+      @store.store_tag_relations.each do |tag|
+        tag.delete
+      end
+
+      tag_list.each do |word|
+        tag = Tag.where(word: word).first_or_initialize
+        tag.save
+        
+        store_tag = StoreTagRelation.where(store_id: @store.id, tag_id: tag.id).first_or_initialize
+        store_tag.update(store_id: @store.id, tag_id: tag.id)
+      end
+    end
+  end
+
+  def to_model
+    store
+  end
+
+  private
+
+  attr_reader :store
+
+  def default_attributes
+    {
+      name: store.name,
+      image: store.image,
+      adress: store.adress,
+      station: store.station,
+      price: store.price,
+      store_time: store.store_time,
+      link: store.link,
+      word: store.tags.pluck(:word).join(',')
+    }
   end
 end

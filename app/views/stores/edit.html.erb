@@ -1,6 +1,6 @@
 <h1><%= link_to "Kamindokoro", root_path %></h1>
 
-<%= form_with model: @store, local: true do |f| %>
+<%= form_with model: @store, url: store_path, local: true do |f| %>
 
 <%= render 'shared/error_messages', model: f.object %>
 
@@ -30,6 +30,11 @@
   <div>
   <p>お店のホームページURL</p>
     <%= f.url_field :link, placeholder: "お店のホームページURL" %>
+  </div>
+  <div>
+    <p>タグ</p>
+    <% word_str = @store.tags.pluck(:word).join(',') %>
+    <%= f.text_field :word, value: word_str   %>
   </div>
   <div>
     <%= f.submit "登録する" %>

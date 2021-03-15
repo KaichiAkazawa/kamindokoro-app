@@ -4,13 +4,14 @@ class StoresController < ApplicationController
   end
 
   def new
-    @store = StoresTag.new
+    @store_tag = StoresTag.new
   end
 
   def create
-    @store = StoresTag.new(store_params)
-    if @store.valid?
-      @store.save
+    @store_tag = StoresTag.new(store_params)
+    tag_list = params[:store][:word].split(',')
+    if @store_tag.valid?
+      @store_tag.save(tag_list)
       redirect_to root_path
     else
       render :new
@@ -24,12 +25,21 @@ class StoresController < ApplicationController
   def edit
     @store = Store.find(params[:id])
     redirect_to root_path unless owner_user_signed_in? && current_owner_user == @store.owner_user
+    @store_tag = StoresTag.new(store: @store)
+    binding.pry
   end
 
   def update
     @store = Store.find(params[:id])
     redirect_to root_path unless owner_user_signed_in? && current_owner_user == @store.owner_user
-    @store.update(store_params)
+    @store_tag = StoresTag.new(store_params, store: @store)
+    tag_list = params[:store][:word].split(',')
+    if @store_tag.valid?
+      @store_tag.save(tag_list)
+      redirect_to store_path(@store)
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -55,7 +65,7 @@ class StoresController < ApplicationController
   private
 
   def store_params
-    params.require(:stores_tag).permit(:name, :image, :adress, :station, :price, :store_time,
+    params.require(:store).permit(:name, :image, :adress, :station, :price, :store_time,
                                        :link, :word).merge(owner_user_id: current_owner_user.id)
   end
 end

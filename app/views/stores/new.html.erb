@@ -1,46 +1,82 @@
-<h1><%= link_to "Kamindokoro", root_path %></h1>
+<%= render "shared/header"  %>
 
+<%= form_with model: @store_tag, url: stores_path, class: "registration-main", local: true do |f| %>
 
-<h2>お店を登録する</h2>
-<%= form_with model: @store_tag, url: stores_path, local: true do |f| %>
+<div class="form-wrap">
+  <div class="form-header">
+    <h4 class="form-header-text">店舗を登録する</h2>
+  </div>
 
-<%= render 'shared/error_messages', model: f.object %>
+  <%= render 'shared/error_messages', model: f.object %>
 
-  <div>
-    お店の写真をアップロード
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <label class="form-text">お店の写真をアップロード</label>
+    </div>
     <%= f.file_field :image %>
   </div>
-  <div>
-    <p>お店の名前</p>
-    <%= f.text_field :name, placeholder: "お店の名前（必須）" %>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <label class="form-text">店舗名</label>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :name, class: "input-default" %>
   </div>
-  <div>
-    <p>お店の住所</p>
-    <%= f.text_area :adress, placeholder: "お店の住所（必須）" %>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <label class="form-text">住所</label>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_area :adress, class: "input-default" %>
   </div>
-  <div>
-    <p>お店の最寄駅</p>
-    <%= f.text_field :station, placeholder: "例）渋谷駅" %>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <label class="form-text">最寄駅</label>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :station, placeholder: "例）渋谷駅", class: "input-default" %>
   </div>
-  <div>
-    <p>料金（1Hあたり）</p>
-    <%= f.text_field :price %>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <label class="form-text">料金（1Hあたり）</label>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_field :price, class: "input-default" %>
   </div>
-  <div>
-    <p>営業時間帯</p>
-    <%= f.text_area :store_time, placeholder: "例) 平日：10:00-20:00  土日祝：10:00-2200" %>
-  <div>
-  <div>
-  <p>お店のホームページURL</p>
-    <%= f.url_field :link, placeholder: "お店のホームページURL" %>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <label class="form-text">営業時間</label>
+      <span class="indispensable">必須</span>
+    </div>
+    <%= f.text_area :store_time, placeholder: "例) 平日：10:00-20:00  土日祝：10:00-2200", class: "input-default" %>
   </div>
-  <div>
-    <p>タグ</p>
-    <%= f.text_field :word %>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <label class="form-text">店舗のホームページURL</label>
+    </div>
+    <%= f.url_field :link, class: "input-default" %>
+  </div>
+
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <label class="form-text">タグ</label>
+    </div>
+    <%= f.text_field :word, placeholder: "カンマ区切りで複数登録可", class: "input-default" %>
   </div>
   <div id="search-result">
   </div>
-  <div>
-    <%= f.submit "登録する" %>
+
+  <div class="register-btn">
+    <%= f.submit "登録する", class: "register-btn-item" %>
   </div>
+</div>
+
 <% end %>
+
+<%= render "shared/footer"  %>

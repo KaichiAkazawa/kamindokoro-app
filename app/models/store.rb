@@ -7,6 +7,9 @@ class Store < ApplicationRecord
   has_many :store_tag_relations, dependent: :destroy
   has_many :tags, through: :store_tag_relations
 
+  geocoded_by :adress
+  after_validation :geocode, if: :adress_changed?
+
   def avg_score
     if reviews.empty?
       0.0

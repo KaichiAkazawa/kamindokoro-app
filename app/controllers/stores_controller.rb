@@ -64,7 +64,7 @@ class StoresController < ApplicationController
   private
 
   def store_params
-    params.require(:store).permit(:name, :image, :adress, :station, :price, :store_time,
+    params.require(:store).permit(:name, :image, :address, :station, :price, :store_time,
                                        :link, :word).merge(owner_user_id: current_owner_user.id)
   end
 end

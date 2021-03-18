@@ -7,8 +7,8 @@ class Store < ApplicationRecord
   has_many :store_tag_relations, dependent: :destroy
   has_many :tags, through: :store_tag_relations
 
-  geocoded_by :adress
-  after_validation :geocode, if: :adress_changed?
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
 
   def avg_score
     if reviews.empty?
@@ -28,7 +28,7 @@ class Store < ApplicationRecord
 
   def self.store_search(search)
     if search != ''
-      Store.where('name LIKE(?) OR station LIKE(?) OR adress LIKE(?)', "%#{search}%", "%#{search}%", "%#{search}%")
+      Store.where('name LIKE(?) OR station LIKE(?) OR address LIKE(?)', "%#{search}%", "%#{search}%", "%#{search}%")
     else
       Store.all
     end

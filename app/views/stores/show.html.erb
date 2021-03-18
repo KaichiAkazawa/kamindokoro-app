@@ -46,7 +46,7 @@
             所在地
           </div>
           <div class="store-info-content">
-            <%= @store.adress %>
+            <%= @store.address %>
           </div>
         </div>
         <div class="store-info">
@@ -108,7 +108,7 @@
     var transitLayer = new google.maps.TransitLayer();
     transitLayer.setMap(map);
 
-    var contentString = '住所：<%= @store.adress %>';
+    var contentString = '住所：<%= @store.address %>';
     var infowindow = new google.maps.InfoWindow({
       content: contentString
     });

@@ -7,10 +7,10 @@ class StoresTag
     validates :image
     validates :address
     validates :station
-    validates :price, numelicality: { only_integer: true }
+    validates :price, numericality: { only_integer: true, allow_blank: true }
     validates :store_time
   end
-    validates :url, format: /\A#{URI::regexp(%w(http https))}\z/
+    validates :link, format: /\A#{URI::regexp(%w(http https))}\z/, allow_blank: true
 
   # レコードの有無で新規作成or更新を分岐
   delegate :persisted?, to: :store

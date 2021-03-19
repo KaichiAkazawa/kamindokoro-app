@@ -1,0 +1,23 @@
+ja:
+  activerecord:
+    attributes:
+      customer_user:
+        name: 名前
+      owner_user:
+        name: 名前
+  activemodel:
+    attributes:
+      stores_tag:
+        name: 店舗名
+        image: 写真
+        address: 住所
+        station: 最寄駅
+        price: 料金
+        store_time: 営業時間
+        link: URL
+    errors:
+      models:
+        stores_tag:
+          attributes:
+            image:
+              blank: を添付してください

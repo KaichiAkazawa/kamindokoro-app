@@ -18,33 +18,9 @@
       <div class="stores-title pt-4 ">
         <h5 class="text-center"><span class="title">仮眠どころ一覧</span></h5>
       </div>
-      <div class="stores my-5 row">
-        <% @stores.each do |store| %>
-          <div class="store col-xl-4 col-md-6 col-12 ">
-            <div class="store-card">
-              <div class="store-img">
-                <%= link_to store_path(store) do %>
-                  <%= image_tag store.image.variant(resize: '340x220'), class:"img-responsive" %>
-                <% end %>
-              </div>
-              <div class="store-content p-3">
-                <div class="store-name">
-                  <%= store.name %>
-                </div>
-                <ul class="store-tags list-inline">
-                  <% store.tags.each do |tag| %>
-                    <li class="tag list-inline-item"><%= tag.word %></li>
-                  <% end %>
-                </ul>
-                  <div class="star-rating">
-                    <div class="star-rating-front" style="width: <%= store.review_score_percentage %>%">★★★★★</div>
-                    <div class="star-rating-back">★★★★★</div>
-                  </div>
-              </div>
-            </div>
-          </div>
-        <%end%>
-      </div>
+      
+      <%= render partial: "shared/store_list", locals: { stores: @stores } %>
+
     <div>
   </div>
 </div>

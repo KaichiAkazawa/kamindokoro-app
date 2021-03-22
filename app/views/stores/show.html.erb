@@ -25,7 +25,7 @@
       </div>
       <% @store.tags.each do |tag| %>
         <ul class="store-tags list-inline">
-          <li class="tag list-inline-item"><%= tag.word %></li>
+          <li class="tag list-inline-item"><%= link_to tag.word, tag_tag_search_path(tag), class: "tag-word" %></li>
         </ul>
       <% end %>
       <div class="star-rating">

@@ -1,0 +1,27 @@
+<div class="stores my-5 row">
+  <% @stores.each do |store| %>
+    <div class="store col-xl-4 col-md-6 col-12 ">
+      <div class="store-card">
+        <div class="store-img">
+          <%= link_to store_path(store) do %>
+            <%= image_tag store.image.variant(resize: '340x220'), class:"img-responsive" %>
+          <% end %>
+        </div>
+        <div class="store-content p-3">
+          <div class="store-name">
+            <%= store.name %>
+          </div>
+          <ul class="store-tags list-inline">
+          <% store.tags.each do |tag| %>
+            <li class="tag list-inline-item"><%= link_to tag.word, tag_tag_search_path(tag), class: "tag-word" %></li>
+          <% end %>
+          </ul>
+          <div class="star-rating">
+            <div class="star-rating-front" style="width: <%= store.review_score_percentage %>%">★★★★★</div>
+            <div class="star-rating-back">★★★★★</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>

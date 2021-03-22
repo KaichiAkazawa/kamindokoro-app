@@ -60,14 +60,14 @@
     <div class="form-text-wrap">
       <label class="form-text">店舗のホームページURL</label>
     </div>
-    <%= f.url_field :link, class: "input-default" %>
+    <%= f.url_field :link, placeholder: "https://example.com", class: "input-default" %>
   </div>
 
   <div class="form-group">
     <div class="form-text-wrap">
       <label class="form-text">タグ</label>
     </div>
-    <%= f.text_field :word, placeholder: "カンマ区切りで複数登録可", class: "input-default" %>
+    <%= f.text_field :word, placeholder: "タグ1, タグ2", class: "input-default" %>
   </div>
   <div id="search-result">
   </div>

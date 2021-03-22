@@ -16,11 +16,11 @@ Rails.application.routes.draw do
     resources :reviews, only: [:index, :create]
     resources :bookmarks, only: [:create, :destroy]
     collection do
-      get 'tag_search'
+      get 'keyword_search'
     end
-    collection do
-      get 'store_search'
-    end
+  end
+  resources :tags do
+    get 'tag_search', to: 'stores#tag_search'
   end
   resources :customer_users, only: [:index, :show]
   

@@ -1,0 +1,34 @@
+<%= render "shared/header" %>
+
+<div class="main">
+  <div class="home-header text-center">
+    <div class="home-title col-12">
+      <h1>さあ、寝よう　　　　　　　　　　</h1>
+    </div>
+    <div class="search-form">
+      <%= form_with(url: keyword_search_stores_path, local: true, method: :get) do |f| %>
+        <%= f.text_field :keyword, placeholder: "店舗名・地名", class:" search-form col-6" %>
+        <%= f.submit "検索",  class:"search-btn" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="tag-index">
+    <% @tags.each do |tag|  %>
+      <%= link_to tag.word, tag_tag_search_path(tag) %>
+    <% end %>
+  </div>
+
+  <div class="top-page-main">
+    <div class="container">
+      <div class="stores-title pt-4 ">
+        <h5 class="text-center"><span class="title">「<%= @keyword %>」の検索結果</span></h5>
+      </div>
+      
+      <%= render partial: "shared/store_list", locals: { stores: @stores } %>
+
+    <div>
+  </div>
+</div>
+
+<%= render "shared/footer" %>

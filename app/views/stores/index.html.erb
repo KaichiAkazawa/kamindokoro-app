@@ -4,12 +4,6 @@
   
   <%= render "shared/top_search_form" %>
 
-  <div class="tag-index">
-    <% @tags.each do |tag|  %>
-      <%= link_to tag.word, tag_tag_search_path(tag) %>
-    <% end %>
-  </div>
-
   <div class="top-page-main">
     <div class="container">
       <div class="stores-title pt-4 ">

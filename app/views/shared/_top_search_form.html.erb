@@ -9,3 +9,16 @@
     <% end %>
   </div>
 </div>
+
+<div class="tag-index text-center">
+  <div class="tag-index-title pt-4 ">
+    <h5><span class="title">こだわりから探す</span></h5>
+  </div>
+  <div class="tag-index-list"> 
+  <% @tags.each do |tag| %>
+    <div class="top-tag ">
+      <%= link_to tag.word, tag_tag_search_path(tag), class: "tag-word" %>
+    </div>
+  <% end %>
+  </div>
+</div>

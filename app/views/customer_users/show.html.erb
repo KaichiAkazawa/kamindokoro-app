@@ -16,11 +16,11 @@
   <div class="container">
     <div class="stores my-5 row">
       <% @bookmarks.each do |bookmark| %>
-        <div class="store col-xl-4 col-md-6 col-12">
+        <div class="store col-xl-4 col-md-6 col-12 ">
           <div class="store-card">
             <div class="store-img">
               <%= link_to store_path(bookmark.store) do %>
-                <%= image_tag bookmark.store.image.variant(resize: '340x300'), class:"img-responsive" %>
+                <%= image_tag bookmark.store.image.variant(resize: '340x220'), class:"img-responsive" %>
               <% end %>
             </div>
             <div class="store-content p-3">
@@ -28,24 +28,20 @@
                 <%= bookmark.store.name %>
               </div>
               <ul class="store-tags list-inline">
-                <% bookmark.store.tags.each do |tag| %>
-                  <li class="tag list-inline-item"><%= tag.word %></li>
-                <% end %>
+              <% bookmark.store.tags.each do |tag| %>
+                <li class="tag list-inline-item"><%= link_to tag.word, tag_tag_search_path(tag), class: "tag-word" %></li>
+              <% end %>
               </ul>
-              <div class="store-station">
-                最寄駅：
-                <%= bookmark.store.station %>
-              </div>
-              <div>
-                <%= link_to store_reviews_path(bookmark.store) do %>
-                  <%= bookmark.store.avg_score %>点（<%= bookmark.store.reviews.count %>件）
-                <% end %>
+              <div class="star-rating">
+                <div class="star-rating-front" style="width: <%= bookmark.store.review_score_percentage %>%">★★★★★</div>
+                <div class="star-rating-back">★★★★★</div>
               </div>
             </div>
           </div>
         </div>
-      <% end %>
+      <%end%>
     </div>
+    
   </div>
 </div>
 

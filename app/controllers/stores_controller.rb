@@ -1,7 +1,7 @@
 class StoresController < ApplicationController
   def index
     @tags = Tag.all
-    @stores = Store.all.order(created_at: :desc)
+    @stores = Store.all.order(created_at: :desc).page(params[:page]).per(6)
   end
 
   def new
@@ -53,13 +53,13 @@ class StoresController < ApplicationController
   def tag_search
     @tags = Tag.all
     @tag = Tag.find(params[:tag_id])
-    @stores = @tag.stores.all
+    @stores = @tag.stores.all.page(params[:page]).per(6)
   end
   
   # キーワード検索
   def keyword_search
     @tags = Tag.all
-    @stores = Store.keyword_search(params[:keyword]).order(created_at: :desc)
+    @stores = Store.keyword_search(params[:keyword]).order(created_at: :desc).page(params[:page]).per(6)
     @keyword = params[:keyword]
   end
 

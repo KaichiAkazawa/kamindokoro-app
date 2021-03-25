@@ -23,19 +23,21 @@
       <div class="store-show-img-content">
         <%= image_tag @store.image.variant(resize: '500x500'), class:"store-show-img" %>
       </div>
-      <% @store.tags.each do |tag| %>
         <ul class="store-tags list-inline">
-          <li class="tag list-inline-item"><%= link_to tag.word, tag_tag_search_path(tag), class: "tag-word" %></li>
+          <% @store.tags.each do |tag| %>
+            <li class="tag list-inline-item"><%= link_to tag.word, tag_tag_search_path(tag), class: "tag-word" %></li>
+          <% end %>
         </ul>
-      <% end %>
-      <div class="star-rating">
-        <div class="star-rating-front" style="width: <%= @store.review_score_percentage %>%">★★★★★</div>
-        <div class="star-rating-back">★★★★★</div>
-      </div>
-      <div class="review-link">
-        <%= link_to store_reviews_path(@store) do %>
-          <%= @store.avg_score %>点（<%= @store.reviews.count %>件）
-        <% end %>
+      <div class="show-review">
+        <div class="star-rating">
+          <div class="star-rating-front" style="width: <%= @store.review_score_percentage %>%">★★★★★</div>
+          <div class="star-rating-back">★★★★★</div>
+        </div>
+        <div class="review-link">
+          <%= link_to store_reviews_path(@store) do %>
+            <%= @store.avg_score %>点（<%= @store.reviews.count %>件）
+          <% end %>
+        </div>
       </div>
       
       <div class="store-infos">

@@ -36,6 +36,14 @@
 .store-show-img-content {
   text-align: center;
 }
+.show-review {
+  display: flex;
+  align-items: center;
+}
+
+.star-rating {
+  height: 40px;
+}
 
 .review-link {
   padding: 20px;

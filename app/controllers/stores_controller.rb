@@ -55,7 +55,7 @@ class StoresController < ApplicationController
     @tag = Tag.find(params[:tag_id])
     @stores = @tag.stores.all.page(params[:page]).per(6)
   end
-  
+
   # キーワード検索
   def keyword_search
     @tags = Tag.all
@@ -67,6 +67,6 @@ class StoresController < ApplicationController
 
   def store_params
     params.require(:store).permit(:name, :image, :address, :station, :price, :store_time,
-                                       :link, :word).merge(owner_user_id: current_owner_user.id)
+                                  :link, :word).merge(owner_user_id: current_owner_user.id)
   end
 end

@@ -10,7 +10,7 @@ class StoresTag
     validates :price, numericality: { only_integer: true, allow_blank: true }
     validates :store_time
   end
-    validates :link, format: /\A#{URI::regexp(%w(http https))}\z/, allow_blank: true
+  validates :link, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
 
   # レコードの有無で新規作成or更新を分岐
   delegate :persisted?, to: :store
@@ -24,7 +24,7 @@ class StoresTag
   def save(tag_list)
     ActiveRecord::Base.transaction do
       @store.update(name: name, image: image, address: address, station: station, price: price, store_time: store_time,
-                          link: link, owner_user_id: owner_user_id)
+                    link: link, owner_user_id: owner_user_id)
 
       @store.store_tag_relations.each do |tag|
         tag.delete
@@ -33,7 +33,7 @@ class StoresTag
       tag_list.each do |word|
         tag = Tag.where(word: word).first_or_initialize
         tag.save
-        
+
         store_tag = StoreTagRelation.where(store_id: @store.id, tag_id: tag.id).first_or_initialize
         store_tag.update(store_id: @store.id, tag_id: tag.id)
       end

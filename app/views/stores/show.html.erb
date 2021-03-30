@@ -4,16 +4,8 @@
   <div class="store-show-top">
       <h3 class="store-show-name"><%= @store.name %></h3>
     <% if customer_user_signed_in? %>
-      <div class="bookmark-icon">
-        <% if !Bookmark.exists?(customer_user_id: current_customer_user.id, store_id: @store.id) %>
-          <%= link_to store_bookmarks_path(@store), method: :post, local: true do %>
-            <i class="far fa-bookmark icon"></i>
-          <% end %>
-        <% else %>
-          <%= link_to store_bookmark_path(@store), method: :delete, local: true do %>
-            <i class="fas fa-bookmark icon"></i>
-          <% end %>
-        <% end %>
+      <div id="bookmark-icon" class="bookmark-icon">
+        <%= render 'bookmarks/bookmark', store: @store %>
       </div>
     <% end %>
   </div>

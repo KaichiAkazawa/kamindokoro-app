@@ -1,0 +1,5 @@
+<% if !Bookmark.exists?(customer_user_id: current_customer_user.id, store_id: store.id) %>
+  <%= render 'bookmarks/bkm', store: store %>
+<% else %>
+  <%= render 'bookmarks/unbkm', store: store %>
+<% end %>

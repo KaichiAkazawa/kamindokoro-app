@@ -24,4 +24,10 @@ class CustomerUsers::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  def guest_sign_in
+    customer_user = CustomerUser.guest
+    sign_in customer_user
+    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
 end

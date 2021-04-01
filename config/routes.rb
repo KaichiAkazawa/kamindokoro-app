@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     passwords: 'customer_users/passwords',
     registrations: 'customer_users/registrations'
   }
+  devise_scope :customer_user do
+    post 'customer_users/guest_sign_in', to: 'customer_users/sessions#guest_sign_in'
+  end
 
   devise_for :owner_users, controllers: {
     sessions: 'owner_users/sessions',

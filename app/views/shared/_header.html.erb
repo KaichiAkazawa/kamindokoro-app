@@ -33,6 +33,7 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenu3">
           <%= link_to "新規登録", new_customer_user_registration_path, class:"dropdown-item" %>
           <%= link_to "ログイン", new_customer_user_session_path, class:"dropdown-item" %>
+          <%= link_to 'ゲストログイン', customer_users_guest_sign_in_path, method: :post, class:"dropdown-item" %>
         </div>
       </div>
       <div class="dropdown">

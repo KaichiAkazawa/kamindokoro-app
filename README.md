@@ -7,7 +7,9 @@
 ![top-page](https://user-images.githubusercontent.com/73063192/112452367-e7004780-8d99-11eb-9861-7c7af7ab3097.png)
 
 ## 🌐アプリURL
-http://35.72.70.97/
+https://kamindokoro.com/
+
+右側のメニュータブから、カスタマー側オーナー側それぞれゲストログイン可能です。
 
 ## 📝制作背景
 ### 日中外出していて眠くなった時、手軽に仮眠が取れる場所を探したい

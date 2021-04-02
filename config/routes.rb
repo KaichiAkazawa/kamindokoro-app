@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     passwords: 'owner_users/passwords',
     registrations: 'owner_users/registrations'
   }
+  devise_scope :owner_user do
+    post 'owner_users/guest_sign_in', to: 'owner_users/sessions#guest_sign_in'
+  end
+
   root to: 'stores#index'
 
   resources :stores, except: [:index] do

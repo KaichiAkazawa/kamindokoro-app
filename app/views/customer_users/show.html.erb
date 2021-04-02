@@ -3,10 +3,14 @@
 <div class="customer">
   <div class="profile">
     <div class="profile-img-area">
-      <img src="/assets/profile-default.png" width="100px", height="100px" class="profile-img" >
+      <% if @customer_user.avatar.attached? %>
+      <%= image_tag @customer_user.avatar, :size => "100x100" %>
+      <% else %>
+        <%= image_tag "/images/profile-default.png", :size => "100x100" %>
+      <% end %>
     </div>
     <div class="customer-name">
-      <h3><%= @name %></h3>
+      <h3><%= @customer_user.name %></h3>
     </div>
   </div>
   <div class="bookmarks-title">

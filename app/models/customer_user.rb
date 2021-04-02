@@ -7,6 +7,7 @@ class CustomerUser < ApplicationRecord
   has_many :comments
   has_many :reviews
   has_many :bookmarks
+  has_one_attached :avatar
 
   validates :name, presence: true
 

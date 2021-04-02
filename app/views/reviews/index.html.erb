@@ -11,7 +11,11 @@
         <div class="reviewer">
           <div class="reviewer-img">
             <%= link_to customer_user_path(review.customer_user) do %>
-              <img src="/assets/profile-default.png" width="50px", height="50px" class="profile-img" >
+              <% if review.customer_user.avatar.attached? %>
+                <%= image_tag review.customer_user.avatar, :size => "50x50" %>
+              <% else %>
+                <%= image_tag "/images/profile-default.png", :size => "50x50", class: "profile-img" %>
+              <% end %>
             <% end %>
           </div>
           <div class="reviewer-name">

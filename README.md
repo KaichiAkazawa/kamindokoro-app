@@ -70,8 +70,9 @@ https://kamindokoro.com/
 - MySQL: 5.6.50
 
 ### 本番環境
-- AWS(EC2)
+- AWS(EC2,ALB,Route53)
 - Nginx
+- Unicorn
 
 ### CI/CD
 - Capistrano
@@ -85,6 +86,9 @@ https://kamindokoro.com/
 
 ## 📝ER図
 ![kamindokoro-ER](https://user-images.githubusercontent.com/73063192/112134286-ec318b00-8c0f-11eb-835e-642832a5db5d.png)
+
+## インフラ構成
+![kamindokoro_infra](https://user-images.githubusercontent.com/73063192/113469699-adf75f80-948a-11eb-9329-7b12f30b67da.png)
 
 ## 📝今後実装予定の機能
 ### SNS認証ログイン機能

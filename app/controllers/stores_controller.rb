@@ -71,6 +71,4 @@ class StoresController < ApplicationController
     params.require(:store).permit(:name, :image, :address, :station, :price, :store_time,
                                   :link, :word).merge(owner_user_id: current_owner_user.id)
   end
-
-
 end

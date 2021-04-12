@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe "Stores", type: :request do
+RSpec.describe 'Stores', type: :request do
   before do
     @owner_user = FactoryBot.create(:owner_user)
     @store = Store.new(
-      name: "test",
-      address: "test",
-      station: "test",
-      price: "1000",
-      store_time: "test",
+      name: 'test',
+      address: 'test',
+      station: 'test',
+      price: '1000',
+      store_time: 'test',
       owner_user_id: @owner_user.id
     )
     @store.image = fixture_file_upload('public/images/test_sample.jpg')
@@ -24,7 +24,7 @@ RSpec.describe "Stores", type: :request do
   end
 
   describe 'GET #new' do
-    context "オーナーユーザーでログインしている場合" do
+    context 'オーナーユーザーでログインしている場合' do
       before do
         sign_in @owner_user
       end
@@ -34,7 +34,7 @@ RSpec.describe "Stores", type: :request do
         expect(response).to render_template('stores/new')
       end
     end
-    context "ログインしていない場合" do
+    context 'ログインしていない場合' do
       it 'ログインページにリダイレクトされる' do
         get new_store_path
         expect(response.status).to eq 302

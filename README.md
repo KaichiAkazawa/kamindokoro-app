@@ -1,4 +1,4 @@
-# 仮眠処 | KaminDokoro
+## ✏️アプリ名
 ![logo](https://user-images.githubusercontent.com/73063192/112452557-17e07c80-8d9a-11eb-88a3-0b113ebc6976.png)
 
 ## 🔍概要
@@ -24,31 +24,41 @@ https://kamindokoro.com/
 - 必要な情報を入力しログイン（新規登録）します。
 ### 店舗検索機能
 - トップページの検索フォームから検索したいワードを入力します。検索できるワードは「店舗名」「地名」「駅名」です。
+
 ![keyword_search](https://user-images.githubusercontent.com/73063192/112466937-c63fee00-8da9-11eb-972f-dfa4d939d707.gif)
+
 ### 店舗登録機能（オーナーユーザー限定）
 - オーナーの場合、右上のメニューから「お店を登録する」をクリックし、必要な情報を入力して店舗を登録します。
-### ブックマーク機能（一般ユーザー限定）
+
+### ブックマーク機能（カスタマーユーザー限定）
 - 店舗詳細ページから、店舗名の右側にあるブックマークアイコンをクリックすることで、その店舗をブックマークします。
 - ブックマークした店舗を確認する際は、右上のメニューから「マイページ」をクリックしマイページへ移動します。マイページにブックマークした店舗一覧が表示されます。
+
 ![bookmark](https://user-images.githubusercontent.com/73063192/112466816-9b559a00-8da9-11eb-8651-ad22380904f0.gif)
-### レビュー機能（一般ユーザー限定）
+
+### レビュー機能（カスタマーユーザー限定）
 - 店舗詳細ページからレビュー点数をクリックすると、その店舗のレビュー一覧ページに移動します。
 - レビュー一覧ページの下部にあるレビュー投稿フォームからレビューを投稿できます。
   星マークをクリックすることで５点満点で点数をつけることができ、フォームにレビューコメントを入力して送信ボタンをクリックします。
+
 ![review](https://user-images.githubusercontent.com/73063192/112467429-60a03180-8daa-11eb-8879-3e5c05e82333.gif)
+
 ### タグ機能
 - 店舗登録時、タグを登録できます。タグはカンマで区切ることで複数つけることができます。
 - タグ名をクリックすると、そのタグを含む店舗一覧が表示されます。
+
 ![tag_search](https://user-images.githubusercontent.com/73063192/112467721-c096d800-8daa-11eb-8770-70dd762e7b86.gif)
+
 ### 地図表示機能
 - 登録した店舗の住所から、店舗の位置情報をGoogleMapで表示します。
+
 ![show_map](https://user-images.githubusercontent.com/73063192/112467975-10759f00-8dab-11eb-9483-1090a135c727.gif)
 
 ## 📝工夫したポイント
 ### 店舗の良さがぱっと見てわかるようにする
 - 店舗にタグ付け機能を実装したことで、その店舗がどういう店舗なのかわかるようにしました。
 - ユーザーからのレビューを投稿できるようにし、その店舗の評判を把握できるようにしました。
-またレビュー結果を星で表示することにより、視覚的に把握できるようにしました。
+- またレビュー結果を星で表示することにより、視覚的に把握できるようにしました。
 
 
 ## ⚙️使用技術・開発環境
@@ -63,7 +73,6 @@ https://kamindokoro.com/
 
 ### テスト・静的コード解析
 - Rspec
-- FactoryBot
 - Rubocop
 
 ### DB
@@ -76,6 +85,7 @@ https://kamindokoro.com/
 
 ### CI/CD
 - Capistrano
+- CircleCI
 
 ### API
 - Maps JavaScript API
@@ -88,7 +98,7 @@ https://kamindokoro.com/
 ![kamindokoro-ER](https://user-images.githubusercontent.com/73063192/112134286-ec318b00-8c0f-11eb-835e-642832a5db5d.png)
 
 ## インフラ構成
-![kamindokoro_infra](https://user-images.githubusercontent.com/73063192/113469699-adf75f80-948a-11eb-9329-7b12f30b67da.png)
+![kamindokoro_infra](https://user-images.githubusercontent.com/73063192/114409694-abf97300-9be5-11eb-9231-8713df5432a7.png)
 
 ## 📝今後実装予定の機能
 ### SNS認証ログイン機能

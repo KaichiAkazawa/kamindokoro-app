@@ -1,4 +1,6 @@
 class StoresController < ApplicationController
+  before_action :authenticate_owner_user!, only: [:new, :create, :edit]
+
   def index
     @tags = Tag.all
     @stores = Store.all.order(created_at: :desc).page(params[:page]).per(6)

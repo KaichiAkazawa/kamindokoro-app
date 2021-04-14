@@ -1,5 +1,6 @@
 class StoresController < ApplicationController
   before_action :authenticate_owner_user!, only: [:new, :create, :edit]
+  before_action :set_store, only: [:show, :edit, :update, :destroy]
 
   def index
     @tags = Tag.all
@@ -22,17 +23,14 @@ class StoresController < ApplicationController
   end
 
   def show
-    @store = Store.find(params[:id])
   end
 
   def edit
-    @store = Store.find(params[:id])
     redirect_to root_path unless owner_user_signed_in? && current_owner_user == @store.owner_user
     @store_tag = StoresTag.new(store: @store)
   end
 
   def update
-    @store = Store.find(params[:id])
     redirect_to root_path unless owner_user_signed_in? && current_owner_user == @store.owner_user
     @store_tag = StoresTag.new(store_params, store: @store)
     tag_list = params[:store][:word].split(',')
@@ -45,7 +43,6 @@ class StoresController < ApplicationController
   end
 
   def destroy
-    @store = Store.find(params[:id])
     redirect_to root_path unless owner_user_signed_in? && current_owner_user == @store.owner_user
     @store.destroy
     redirect_to root_path
@@ -70,5 +67,9 @@ class StoresController < ApplicationController
   def store_params
     params.require(:store).permit(:name, :image, :address, :station, :price, :store_time,
                                   :link, :word).merge(owner_user_id: current_owner_user.id)
+  end
+
+  def set_store
+    @store = Store.find(params[:id])
   end
 end

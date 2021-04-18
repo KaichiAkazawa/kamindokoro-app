@@ -3,7 +3,7 @@ class BookmarksController < ApplicationController
 
   def create
     @store = Store.find(params[:store_id])
-    bookmark = Bookmark.create(customer_user_id: current_customer_user.id, store_id: @store.id)
+    Bookmark.create(customer_user_id: current_customer_user.id, store_id: @store.id)
   end
 
   def destroy

@@ -95,10 +95,10 @@ https://kamindokoro.com/
 - Git, GitHub
 
 ## 📝ER図
-![kamindokoro-ER](https://user-images.githubusercontent.com/73063192/112134286-ec318b00-8c0f-11eb-835e-642832a5db5d.png)
+![kamindokoro-ER](https://user-images.githubusercontent.com/73063192/115131279-dad27780-a031-11eb-8d8c-b0189e1aec10.png)
 
 ## インフラ構成
-![kamindokoro_infra](https://user-images.githubusercontent.com/73063192/114409694-abf97300-9be5-11eb-9231-8713df5432a7.png)
+![kamindokoro_infra](https://user-images.githubusercontent.com/73063192/115131236-7b746780-a031-11eb-805c-7fef15225f17.png)
 
 ## 📝今後実装予定の機能
 ### SNS認証ログイン機能

@@ -9,6 +9,10 @@ RSpec.describe CustomerUser, type: :model do
     it '必要な情報を入力すれば新規登録できる' do
       expect(@customer_user).to be_valid
     end
+    it 'プロフィール画像を設定しなくても登録できる' do
+      @customer_user.avatar = nil
+      expect(@customer_user).to be_valid
+    end
   end
 
   describe 'カスタマーユーザー新規登録できない' do
@@ -26,6 +30,12 @@ RSpec.describe CustomerUser, type: :model do
       @customer_user.email = 'foobar'
       @customer_user.valid?
       expect(@customer_user.errors.full_messages).to include('Eメールは不正な値です')
+    end
+    it 'emailが重複すると登録できない' do
+      @customer_user.save
+      another_user = FactoryBot.build(:customer_user, email: @customer_user.email)
+      another_user.valid?
+      expect(another_user.errors.full_messages).to include('Eメールはすでに存在します')
     end
     it 'passwordが空では登録できない' do
       @customer_user.password = ''
